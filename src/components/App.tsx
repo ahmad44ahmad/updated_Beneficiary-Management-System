@@ -23,11 +23,36 @@ import { FamilyGuidanceReferralForm } from './FamilyGuidanceReferralForm';
 import { PostCareFollowUpForm } from './PostCareFollowUpForm';
 import { ClothingManagementPanel } from './ClothingManagementPanel';
 import { DailyFollowUpPanel } from './DailyFollowUpPanel';
+import { DashboardPanel } from './DashboardPanel';
+
+import { MedicalDashboard } from './MedicalDashboard';
+import { NewAdmissionForm } from './NewAdmissionForm';
+import { MedicalProfile, VaccinationRecord } from '../types/medical';
 
 export const App = () => {
-    const [currentView, setCurrentView] = useState<'beneficiaries' | 'inventory' | 'social-activities' | 'clothing' | 'daily-follow-up'>('beneficiaries');
+    const [currentView, setCurrentView] = useState<'dashboard' | 'beneficiaries' | 'inventory' | 'social-activities' | 'clothing' | 'daily-follow-up' | 'medical'>('dashboard');
     const [selectedBeneficiary, setSelectedBeneficiary] = useState<Beneficiary | null>(null);
     const [searchTerm, setSearchTerm] = useState('');
+
+    // Medical Data State
+    const [medicalProfiles, setMedicalProfiles] = useState<MedicalProfile[]>([]);
+    const [isCreatingMedicalProfile, setIsCreatingMedicalProfile] = useState(false);
+
+    // Mock Vaccination Data
+    const [vaccinations, setVaccinations] = useState<VaccinationRecord[]>([
+        { id: '1', beneficiaryId: '101', vaccineName: 'Influenza', dueDate: '2023-11-01', status: 'Overdue' },
+        { id: '2', beneficiaryId: '102', vaccineName: 'Hepatitis B', dueDate: '2023-12-15', status: 'Pending' }
+    ]);
+
+    // Mock Isolation Stats
+    const isolationStats = {
+        totalBeds: 10,
+        occupiedBeds: 2,
+        patients: [
+            { name: 'محمد علي', reason: 'اشتباه عدوى تنفسية' },
+            { name: 'خالد أحمد', reason: 'جدري مائي' }
+        ]
+    };
 
     // Data State
     const [caseStudies, setCaseStudies] = useState<CaseStudy[]>([]);
@@ -63,7 +88,6 @@ export const App = () => {
     const [isCreatingVocationalEval, setIsCreatingVocationalEval] = useState(false);
     const [isCreatingFamilyGuidanceReferral, setIsCreatingFamilyGuidanceReferral] = useState(false);
     const [isCreatingPostCareFollowUp, setIsCreatingPostCareFollowUp] = useState(false);
-
 
     useEffect(() => {
         if (isCreatingCaseStudy || isCreatingSocialResearch || isCreatingRehabPlan || isCreatingClothingRequest || isCreatingMedicalExam || isCreatingEducationalPlan || isCreatingInjuryReport || isCreatingFamilyCaseStudy) {
@@ -188,6 +212,8 @@ export const App = () => {
         setIsCreatingPostCareFollowUp(false);
     };
 
+    // ... existing handlers ...
+
     return (
         <>
             <header className="app-header">
@@ -195,11 +221,24 @@ export const App = () => {
                     <h1>نظام إدارة بيانات المستفيدين - مركز التأهيل الشامل</h1>
                     <nav className="main-nav">
                         <button
+                            className={currentView === 'dashboard' ? 'active' : ''}
+                            onClick={() => setCurrentView('dashboard')}
+                        >
+                            الرئيسية
+                        </button>
+                        <button
+                            className={currentView === 'medical' ? 'active' : ''}
+                            onClick={() => setCurrentView('medical')}
+                        >
+                            القسم الطبي
+                        </button>
+                        <button
                             className={currentView === 'beneficiaries' ? 'active' : ''}
                             onClick={() => setCurrentView('beneficiaries')}
                         >
                             المستفيدين
                         </button>
+                        {/* ... other buttons ... */}
                         <button
                             className={currentView === 'clothing' ? 'active' : ''}
                             onClick={() => setCurrentView('clothing')}
@@ -229,7 +268,19 @@ export const App = () => {
             </header>
 
             <div className="main-container">
-                {currentView === 'beneficiaries' ? (
+                {currentView === 'dashboard' ? (
+                    <DashboardPanel beneficiaries={beneficiaries} inventory={inventory} />
+                ) : currentView === 'medical' ? (
+                    <div className="medical-view">
+                        <div className="actions mb-4 flex justify-end">
+                            <button className="btn-primary" onClick={() => setIsCreatingMedicalProfile(true)}>
+                                + تسجيل دخول طبي جديد (Admission)
+                            </button>
+                        </div>
+                        <MedicalDashboard vaccinations={vaccinations} isolationStats={isolationStats} />
+                    </div>
+                ) : currentView === 'beneficiaries' ? (
+                    // ... existing beneficiary view ...
                     <>
                         <BeneficiaryListPanel
                             beneficiaries={beneficiaries}
@@ -286,6 +337,19 @@ export const App = () => {
                     />
                 )}
             </div>
+
+            {/* Medical Modal */}
+            {isCreatingMedicalProfile && (
+                <NewAdmissionForm
+                    beneficiaries={beneficiaries}
+                    onSave={(profile) => {
+                        setMedicalProfiles([...medicalProfiles, profile]);
+                        setIsCreatingMedicalProfile(false);
+                    }}
+                    onCancel={() => setIsCreatingMedicalProfile(false)}
+                />
+            )}
+
 
             {/* Modals */}
             {isCreatingCaseStudy && selectedBeneficiary && (
