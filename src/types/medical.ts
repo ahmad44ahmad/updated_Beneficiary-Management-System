@@ -79,3 +79,20 @@ export interface VaccinationRecord {
     dueDate: string;
     status: 'Pending' | 'Completed' | 'Overdue';
 }
+
+export interface MedicalExamination {
+    id: string;
+    beneficiaryId: string;
+    beneficiaryName: string;
+    date: string;
+    doctorName: string;
+    diagnosis: string;
+    vitalSigns: {
+        bloodPressure: string;
+        pulse: string;
+        temperature: string;
+        respiration: string;
+    };
+    physicalExamNotes: string;
+    recommendations: string;
+}

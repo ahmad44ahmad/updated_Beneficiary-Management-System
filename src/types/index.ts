@@ -1,3 +1,10 @@
+export * from './medical';
+export * from './social';
+export * from './assets';
+export * from './rehab';
+export * from './quality'; // Export Quality types
+
+// Core Types
 export interface Beneficiary {
     id: string;
     fullName: string;
@@ -24,25 +31,15 @@ export interface Beneficiary {
     status?: 'active' | 'exit';
 }
 
-export interface VisitLog {
-    id: string;
-    beneficiaryId: string;
-    type: 'internal' | 'external' | 'phone' | 'behavioral' | 'emergency';
-    date: string;
-    time: string;
-    visitorName?: string;
-    relation?: string;
-    notes: string;
-    employeeName: string;
-}
-
+// Inventory & Clothing Types
 export interface InventoryItem {
     id: string;
     name: string;
+    category: string;
     size: string;
     quantity: number;
-    category: 'clothing' | 'hygiene' | 'other';
-    imageUrl?: string;
+    minQuantity: number;
+    lastUpdated: string;
 }
 
 export interface ClothingRequestItem {
@@ -53,73 +50,13 @@ export interface ClothingRequestItem {
 export interface ClothingRequest {
     id: string;
     beneficiaryId: string;
-    type: 'summer' | 'winter' | 'eid' | 'other';
     requestDate: string;
     items: ClothingRequestItem[];
-    receiverName: string;
-    status: 'pending' | 'approved' | 'rejected' | 'delivered';
-    signature?: string;
+    status: 'pending' | 'approved' | 'rejected' | 'dispensed';
+    notes?: string;
 }
 
-export interface CaseStudy {
-    id: string;
-    beneficiaryId: string;
-    beneficiaryName: string;
-    beneficiaryAge: number;
-    medicalDiagnosis: string;
-    interviewDate: string;
-    interviewLocation: string;
-    interviewDuration: string;
-    interviewParties: string;
-    interviewResults: string;
-    housingType: string;
-    homeOwnership: string;
-    professionalStatus: string;
-    reasonForNotWorking: string;
-    familyIncomeDetails: string;
-    socialResearchSummary: string;
-    recommendations: string;
-}
-
-export interface SocialResearch {
-    id: string;
-    beneficiaryId: string;
-    beneficiaryName: string;
-    researchDate: string;
-    researcherName: string;
-    guardianName: string;
-    guardianGender: string;
-    guardianAge: string;
-    guardianRelation: string;
-    guardianEducation: string;
-    guardianProfession: string;
-    isFatherAlive: 'yes' | 'no' | 'unknown';
-    isMotherAlive: 'yes' | 'no' | 'unknown';
-    guardianMobile: string;
-    familyComposition: string;
-    disabilityCause: string;
-    hasChronicIllness: 'yes' | 'no';
-    chronicIllnessDetails: string;
-    familyAdaptation: string;
-    socialResearchSummary: string;
-}
-
-export interface MedicalExamination {
-    id: string;
-    beneficiaryId: string;
-    beneficiaryName: string;
-    date: string;
-    doctorName: string;
-    diagnosis: string;
-    vitalSigns: {
-        bloodPressure: string;
-        pulse: string;
-        temperature: string;
-        respiration: string;
-    };
-    physicalExamNotes: string;
-    recommendations: string;
-}
+// ... (Keep other shared types if any, or move them to specific domains later)
 
 export interface RehabTeamMember {
     name: string;
@@ -175,7 +112,6 @@ export interface RehabilitationPlan {
     };
 }
 
-// Group 1: Individual Educational Plan (IEP) - Model 9 & 46
 export interface IndividualEducationalPlan {
     id: string;
     beneficiaryId: string;
@@ -192,7 +128,6 @@ export interface IndividualEducationalPlan {
     evaluation: string;
 }
 
-// Group 2: Injury Report - Model 17
 export interface InjuryReport {
     id: string;
     beneficiaryId: string;
@@ -207,65 +142,6 @@ export interface InjuryReport {
     supervisorName: string;
 }
 
-// Group 3: Family Case Study - Model 29
-export interface FamilyCaseStudy {
-    id: string;
-    beneficiaryId: string;
-    studyDate: string;
-    socialWorkerName: string;
-    familyStructure: string; // Details about parents, siblings
-    economicStatus: string;
-    housingCondition: string;
-    familyRelationships: string;
-    attitudeTowardsBeneficiary: string;
-    challenges: string;
-    recommendations: string;
-}
-
-// Group 4: Social Activities - Model 1, 2, 3
-export interface SocialActivityPlan {
-    id: string;
-    year: string;
-    centerName: string;
-    activityType: string;
-    supervisor: string;
-    generalGoal: string;
-    detailedGoals: string;
-    targetGroup: 'employees' | 'external' | 'both';
-    isLinkedToCoreGoals: boolean;
-    isLinkedToOperationalPlan: boolean;
-    supportSource: 'budget' | 'extra' | 'none';
-    cost: string;
-    expectedOutputs: string;
-    executionTimeStart: string;
-    executionTimeEnd: string;
-}
-
-export interface SocialActivityDocumentation {
-    id: string;
-    activityName: string;
-    date: string;
-    type: string;
-    supervisor: string;
-    internalParticipants: { name: string; job: string; task: string }[];
-    externalParticipants: { name: string; job: string; task: string }[];
-    approvalHead: boolean;
-    approvalSupervisor: boolean;
-    approvalDirector: boolean;
-}
-
-export interface SocialActivityFollowUp {
-    id: string;
-    month: string;
-    activityName: string;
-    type: string;
-    date: string;
-    responsiblePerson: string;
-    status: 'achieved' | 'not_achieved';
-    notes: string;
-}
-
-// Group 5: Training & Rehabilitation - Model 4, 6, 11
 export interface TrainingReferral {
     id: string;
     beneficiaryId: string;
@@ -323,7 +199,6 @@ export interface VocationalEvaluation {
     totalScore: number;
 }
 
-// Group 6: Family Guidance - Model 25, 26, 27, 28, 30
 export interface FamilyGuidanceReferral {
     id: string;
     beneficiaryId: string;
@@ -347,18 +222,6 @@ export interface FamilyGuidanceReferral {
     notes: string;
 }
 
-export interface FamilyGuidancePlan {
-    id: string;
-    beneficiaryId: string;
-    phases: {
-        phaseName: string; // Planning, Execution, Transition, Follow-up
-        executionTimeStart: string;
-        executionTimeEnd: string;
-        expectedOutputs: string;
-        steps: string;
-    }[];
-}
-
 export interface PostCareFollowUp {
     id: string;
     beneficiaryId: string;
@@ -372,145 +235,6 @@ export interface PostCareFollowUp {
         month3: string;
     };
     notes: string;
-}
-
-export interface FamilyGuidanceReport {
-    id: string;
-    month: string;
-    achievements: {
-        trainedCases: number;
-        followUpVisits: number;
-        interviews: number;
-        calls: number;
-        employedCases: number;
-        programs: number;
-        transferredCases: number;
-    };
-    notes: string;
-}
-
-export interface FamilyGuidanceEvaluation {
-    id: string;
-    period: string;
-    satisfactionRate: number;
-    followUpRate: number;
-    integrationRate: number;
-    programsRate: number;
-    interviewsRate: number;
-    initiativesRate: number;
-    totalScore: number;
-}
-
-// Clothing Management Types
-
-export type ClothingSeason = 'summer' | 'winter' | 'eid_fitr' | 'eid_adha';
-
-export interface ClothingItemEntry {
-    itemName: string;
-    size?: string;
-    quantity: number;
-    notes?: string;
-    // For Inventory (Model 1)
-    damagedCount?: number;
-    replacementCount?: number;
-    reason?: string;
-    // For Discard (Model 8, 9, 11)
-    damageType?: string;
-}
-
-// Model 1: Wardrobe Inventory
-export interface WardrobeInventory {
-    id: string;
-    beneficiaryId: string;
-    year: string;
-    season: ClothingSeason;
-    items: ClothingItemEntry[];
-    date: string;
-    socialSupervisor: string;
-    servicesSupervisor: string;
-}
-
-// Model 2 & 3: Needs Assessment
-export interface ClothingNeeds {
-    id: string;
-    beneficiaryId?: string; // Optional if aggregate
-    gender: 'male' | 'female';
-    year: string;
-    season: ClothingSeason;
-    items: ClothingItemEntry[];
-    notes: string;
-    status: 'draft' | 'approved';
-}
-
-// Model 4: Procurement Record
-export interface ClothingProcurement {
-    id: string;
-    date: string;
-    invoiceNumber: string;
-    items: {
-        item: string;
-        quantity: number;
-        invoiceNo: string;
-        amount: number;
-    }[];
-    totalAmount: number;
-    committeeMembers: string[];
-}
-
-// Model 5: Warehouse Receipt
-export interface ClothingWarehouseReceipt {
-    id: string;
-    year: string;
-    season: ClothingSeason;
-    items: ClothingItemEntry[];
-    invoiceImage?: string; // Placeholder for file path
-    warehouseKeeper: string;
-}
-
-// Model 6 & 7: Additional Dispensation
-export interface ClothingDispensation {
-    id: string;
-    beneficiaryId: string;
-    date: string;
-    year: string;
-    season: ClothingSeason;
-    items: ClothingItemEntry[];
-    receiverName: string;
-    notes: string;
-}
-
-// Model 8, 9, 11: Discard/Destruction
-export interface ClothingDiscard {
-    id: string;
-    type: 'individual_handover' | 'monthly_inventory' | 'destruction'; // Model 8, 9, 11
-    date: string;
-    year: string;
-    season?: ClothingSeason;
-    items: ClothingItemEntry[];
-    notes: string;
-}
-
-// Model 10: Warehouse Inventory
-export interface WarehouseInventory {
-    id: string;
-    date: string;
-    items: ClothingItemEntry[];
-    warehouseKeeper: string;
-    custodian: string;
-    director: string;
-}
-
-// Model 12: Committee Formation
-export interface ClothingCommittee {
-    id: string;
-    year: string;
-    formationDate: string;
-    members: {
-        name: string;
-        role: string;
-        jobTitle: string;
-    }[];
-    tasks: string[];
 }
 
 // Daily Follow-up Record Types
@@ -620,4 +344,110 @@ export interface IncidentReport {
         role: string;
     }[];
     notes?: string;
+}
+
+// Case Study & Social Research (Legacy - to be refactored)
+export interface CaseStudy {
+    id: string;
+    beneficiaryId: string;
+    date: string;
+    researcherName: string;
+    informantName: string;
+    informantRelation: string;
+    familyStructure: string;
+    economicSituation: string;
+    housingCondition: string;
+    socialRelations: string;
+    problems: string;
+    recommendations: string;
+}
+
+export interface SocialResearch {
+    id: string;
+    beneficiaryId: string;
+    date: string;
+    researcherName: string;
+    reasonForResearch: string;
+    socialHistory: string;
+    familyHistory: string;
+    economicHistory: string;
+    medicalHistory: string;
+    psychologicalHistory: string;
+    educationalHistory: string;
+    currentSituation: string;
+    researcherOpinion: string;
+    recommendations: string;
+}
+
+export interface VisitLog {
+    id: string;
+    beneficiaryId: string;
+    type: 'internal' | 'behavioral' | 'emergency';
+    date: string;
+    time: string;
+    visitorName?: string;
+    relation?: string;
+    notes: string;
+    employeeName: string;
+}
+
+export interface MedicalExamination {
+    id: string;
+    beneficiaryId: string;
+    date: string;
+    doctorName: string;
+    diagnosis: string;
+    vitalSigns: {
+        bp: string;
+        pulse: string;
+        temp: string;
+        resp: string;
+    };
+    symptoms: string;
+    treatment: string;
+    recommendations: string;
+}
+
+export interface FamilyCaseStudy {
+    id: string;
+    beneficiaryId: string;
+    date: string;
+    researcherName: string;
+    familyComposition: string;
+    economicStatus: string;
+    housingStatus: string;
+    socialStatus: string;
+    healthStatus: string;
+    problems: string;
+    goals: string;
+    plan: string;
+}
+
+export interface SocialActivityPlan {
+    id: string;
+    beneficiaryId: string;
+    date: string;
+    activityName: string;
+    goals: string;
+    procedures: string;
+    evaluation: string;
+}
+
+export interface SocialActivityDocumentation {
+    id: string;
+    beneficiaryId: string;
+    date: string;
+    activityName: string;
+    participationLevel: string;
+    behavior: string;
+    notes: string;
+}
+
+export interface SocialActivityFollowUp {
+    id: string;
+    beneficiaryId: string;
+    date: string;
+    activityName: string;
+    observations: string;
+    recommendations: string;
 }
