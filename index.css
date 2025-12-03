@@ -1,21 +1,27 @@
 @import "tailwindcss";
 
 :root {
-    /* HRSD Brand Identity - Strict Adherence */
+    /* HRSD Brand Identity - Official Colors */
     /* Primary Color: Energy & Vitality (Pantone 1375 C) */
-    --primary-color: #FF9E1B;
-    /* Adjusted to match Pantone 1375 C more closely */
-    --primary-light: #FFB75E;
+    --primary-color: #F5961E;
+    /* RGB 245-150-30 - Pantone 1375 C */
+    --primary-light: #FAB414;
+    /* RGB 250-180-20 - Pantone 1235 C - Gold */
     --primary-dark: #D48200;
 
     /* Secondary Color: Clarity & Support (Pantone 1235 C) */
-    --secondary-color: #FFB81C;
-    /* Pantone 1235 C */
+    --secondary-color: #FAB414;
+    /* RGB 250-180-20 - Pantone 1235 C - Gold */
     --secondary-bg: #F9FAFB;
     /* Light Gray Background for White Space */
 
-    /* Balancing Color: Growth & Sustainability (Teal/Petroleum) */
-    --accent-color: #006C70;
+    /* Balancing Color: Growth & Sustainability (Pantone 3385 C & 2237 C) */
+    --accent-color: #2DB473;
+    /* RGB 45-180-115 - Pantone 3385 C - Green */
+    --accent-teal: #148287;
+    /* RGB 20-130-135 - Pantone 2237 C - Teal */
+    --accent-dark: #14415A;
+    /* RGB 20-65-90 - Pantone 3025 C - Dark Blue */
 
     --text-color: #1F2937;
     --light-text-color: #6B7280;
@@ -54,14 +60,14 @@ body {
 }
 
 .app-header {
-    background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
-    /* Teal to Gold Gradient */
+    background: linear-gradient(135deg, var(--accent-teal), var(--primary-color));
+    /* Teal to Orange Gradient - HRSD Brand */
     color: var(--white-color);
     padding: 1rem 2rem;
     box-shadow: var(--shadow-lg);
     text-align: center;
     border-bottom: 4px solid var(--secondary-color);
-    /* Supporting Yellow Line */
+    /* Supporting Gold Line */
 }
 
 .header-content {
@@ -106,11 +112,11 @@ body {
 
 .main-nav button.active {
     background: white;
-    color: var(--accent-color);
-    /* Teal text for active state */
+    color: var(--accent-teal);
+    /* Teal text for active state - HRSD Brand */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-bottom: 3px solid var(--primary-color);
-    /* Gold underline */
+    /* Orange underline - HRSD Brand */
 }
 
 .main-container {
@@ -175,9 +181,9 @@ body {
 .beneficiary-list-item.selected {
     background-color: #FFF8E1;
     /* Very light gold/yellow background for clarity */
-    color: var(--accent-color);
+    color: var(--accent-teal);
     border-right: 4px solid var(--primary-color);
-    /* Gold Border */
+    /* Orange Border - HRSD Brand */
 }
 
 .beneficiary-list-item.selected .item-id {
@@ -232,8 +238,8 @@ body {
 }
 
 .card-header {
-    background-color: var(--accent-color);
-    /* Teal Header for Formalism */
+    background-color: var(--accent-teal);
+    /* Teal Header for Formalism - HRSD Brand */
     color: var(--white-color);
     padding: 0.75rem 1.5rem;
     font-size: 1.2rem;
@@ -242,7 +248,7 @@ body {
     justify-content: space-between;
     align-items: center;
     border-bottom: 2px solid var(--primary-color);
-    /* Gold Separator */
+    /* Orange Separator - HRSD Brand */
 }
 
 .card-content {
@@ -347,7 +353,7 @@ body {
 .modal-header h3 {
     margin: 0;
     font-size: 1.4rem;
-    color: var(--accent-color);
+    color: var(--accent-teal);
 }
 
 .close-button {
@@ -630,7 +636,7 @@ legend {
 
 .main-nav button.active {
     background: white;
-    color: var(--primary-color);
+    color: var(--accent-teal);
     font-weight: bold;
 }
 

@@ -8,32 +8,36 @@ export default {
         extend: {
             colors: {
                 primary: {
-                    DEFAULT: '#006241', // HRSD Green
-                    50: '#e6efec',
-                    100: '#cce0d9',
-                    200: '#99c2b3',
-                    300: '#66a38c',
-                    400: '#338566',
-                    500: '#006241',
-                    600: '#004f34',
-                    700: '#003b27',
-                    800: '#00271a',
-                    900: '#00140d',
+                    DEFAULT: '#F5961E', // Pantone 1375 C - Orange (RGB 245-150-30)
+                    50: '#fef7ee',
+                    100: '#fdecd3',
+                    200: '#fad6a5',
+                    300: '#f7ba6d',
+                    400: '#f59633',
+                    500: '#F5961E',
+                    600: '#d48200',
+                    700: '#b06602',
+                    800: '#8e5007',
+                    900: '#744208',
                 },
                 secondary: {
-                    DEFAULT: '#D4AF37', // HRSD Gold
-                    50: '#fbf7eb',
-                    100: '#f7efd6',
-                    200: '#efdfad',
-                    300: '#e7cf85',
-                    400: '#dfbf5c',
-                    500: '#D4AF37',
-                    600: '#aa8c2c',
-                    700: '#806921',
-                    800: '#554616',
-                    900: '#2a230b',
+                    DEFAULT: '#FAB414', // Pantone 1235 C - Gold (RGB 250-180-20)
+                    50: '#fffbeb',
+                    100: '#fef3c7',
+                    200: '#fde68a',
+                    300: '#fcd34d',
+                    400: '#fbbf24',
+                    500: '#FAB414',
+                    600: '#d39e0b',
+                    700: '#b08309',
+                    800: '#8e6a0a',
+                    900: '#74560c',
                 },
-                accent: '#c5a47e',
+                accent: {
+                    DEFAULT: '#2DB473', // Pantone 3385 C - Green (RGB 45-180-115)
+                    teal: '#148287', // Pantone 2237 C - Teal (RGB 20-130-135)
+                    dark: '#14415A', // Pantone 3025 C - Dark Blue (RGB 20-65-90)
+                },
                 surface: '#F9FAFB',
             },
             fontFamily: {

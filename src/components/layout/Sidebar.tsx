@@ -26,14 +26,26 @@ export const Sidebar = () => {
     ];
 
     return (
-        <aside className="w-64 bg-primary text-white flex flex-col h-screen fixed right-0 top-0 border-l border-primary-700 z-50 shadow-xl">
-            <div className="p-6 border-b border-primary-700 flex items-center gap-3 bg-primary-800">
-                <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center font-bold text-primary shadow-sm">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Saudi_Vision_2030_logo.svg/1200px-Saudi_Vision_2030_logo.svg.png" alt="Logo" className="w-8 h-8 object-contain" />
+        <aside className="w-64 text-white flex flex-col h-screen fixed right-0 top-0 border-l z-50 shadow-xl" style={{ backgroundColor: '#14415A', borderColor: '#148287' }}>
+            <div className="p-6 border-b flex items-center gap-3" style={{ borderColor: '#148287', backgroundColor: '#0f3447' }}>
+                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center shadow-sm p-1">
+                    <svg viewBox="0 0 100 100" className="w-full h-full">
+                        <defs>
+                            <linearGradient id="hrsdGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style={{ stopColor: '#F5961E', stopOpacity: 1 }} />
+                                <stop offset="50%" style={{ stopColor: '#FAB414', stopOpacity: 1 }} />
+                                <stop offset="100%" style={{ stopColor: '#2DB473', stopOpacity: 1 }} />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="50" cy="50" r="45" fill="url(#hrsdGradient)" opacity="0.1" />
+                        <path d="M50 15 L55 35 L75 35 L60 48 L65 68 L50 55 L35 68 L40 48 L25 35 L45 35 Z" fill="#F5961E" />
+                        <circle cx="50" cy="50" r="12" fill="#2DB473" />
+                        <circle cx="50" cy="50" r="8" fill="#148287" />
+                    </svg>
                 </div>
                 <div>
                     <h1 className="font-bold text-base">مركز التأهيل الشامل</h1>
-                    <p className="text-xs text-primary-200">وزارة الموارد البشرية</p>
+                    <p className="text-xs" style={{ color: '#FAB414' }}>وزارة الموارد البشرية والتنمية الاجتماعية</p>
                 </div>
             </div>
 
@@ -46,31 +58,51 @@ export const Sidebar = () => {
                             cn(
                                 'flex items-center gap-3 px-4 py-3 rounded-lg transition-all text-sm font-medium',
                                 isActive
-                                    ? 'bg-primary-700 text-secondary shadow-sm translate-x-[-4px]'
-                                    : 'text-primary-100 hover:bg-primary-600 hover:text-white hover:translate-x-[-2px]'
+                                    ? 'shadow-sm translate-x-[-4px]'
+                                    : 'text-gray-200 hover:text-white hover:translate-x-[-2px]'
                             )
                         }
+                        style={({ isActive }: any) => isActive ? { backgroundColor: '#148287', color: '#FAB414' } : {}}
+                        onMouseEnter={(e) => {
+                            if (!e.currentTarget.classList.contains('translate-x-[-4px]')) {
+                                e.currentTarget.style.backgroundColor = 'rgba(20, 130, 135, 0.3)';
+                            }
+                        }}
+                        onMouseLeave={(e) => {
+                            if (!e.currentTarget.classList.contains('translate-x-[-4px]')) {
+                                e.currentTarget.style.backgroundColor = '';
+                            }
+                        }}
                     >
-                        <item.icon className={cn("w-5 h-5", ({ isActive }: any) => isActive ? "text-secondary" : "text-primary-200")} />
-                        {item.label}
+                        {({ isActive }) => (
+                            <>
+                                <item.icon className="w-5 h-5" style={{ color: isActive ? '#FAB414' : '#E5E7EB' }} />
+                                {item.label}
+                            </>
+                        )}
                     </NavLink>
                 ))}
             </nav>
 
-            <div className="p-4 border-t border-primary-700 bg-primary-800">
+            <div className="p-4 border-t" style={{ borderColor: '#148287', backgroundColor: '#0f3447' }}>
                 <NavLink
                     to="/settings"
                     className={({ isActive }) =>
                         cn(
                             'flex items-center gap-3 px-4 py-3 rounded-lg transition-colors text-sm font-medium',
                             isActive
-                                ? 'bg-primary-700 text-secondary'
-                                : 'text-primary-200 hover:bg-primary-600 hover:text-white'
+                                ? ''
+                                : 'text-gray-200 hover:text-white'
                         )
                     }
+                    style={({ isActive }: any) => isActive ? { backgroundColor: '#148287', color: '#FAB414' } : {}}
                 >
-                    <Settings className="w-5 h-5" />
-                    الإعدادات
+                    {({ isActive }) => (
+                        <>
+                            <Settings className="w-5 h-5" style={{ color: isActive ? '#FAB414' : '#E5E7EB' }} />
+                            الإعدادات
+                        </>
+                    )}
                 </NavLink>
             </div>
         </aside>
