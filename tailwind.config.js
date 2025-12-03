@@ -8,32 +8,37 @@ export default {
         extend: {
             colors: {
                 primary: {
-                    DEFAULT: '#006241', // HRSD Green
-                    50: '#e6efec',
-                    100: '#cce0d9',
-                    200: '#99c2b3',
-                    300: '#66a38c',
-                    400: '#338566',
-                    500: '#006241',
-                    600: '#004f34',
-                    700: '#003b27',
-                    800: '#00271a',
-                    900: '#00140d',
+                    DEFAULT: '#F5961E', // HRSD Orange (Pantone 1375 C)
+                    50: '#fff8ed',
+                    100: '#ffedd6',
+                    200: '#ffd9ad',
+                    300: '#ffbf7a',
+                    400: '#ff9e47',
+                    500: '#F5961E',
+                    600: '#d9790f',
+                    700: '#b35d0b',
+                    800: '#8f4810',
+                    900: '#753c10',
                 },
                 secondary: {
-                    DEFAULT: '#D4AF37', // HRSD Gold
-                    50: '#fbf7eb',
-                    100: '#f7efd6',
-                    200: '#efdfad',
-                    300: '#e7cf85',
-                    400: '#dfbf5c',
-                    500: '#D4AF37',
-                    600: '#aa8c2c',
-                    700: '#806921',
-                    800: '#554616',
-                    900: '#2a230b',
+                    DEFAULT: '#FAB414', // HRSD Gold (Pantone 1235 C)
+                    50: '#fefce8',
+                    100: '#fff9c2',
+                    200: '#fff08a',
+                    300: '#ffe047',
+                    400: '#FAB414',
+                    500: '#eab308',
+                    600: '#ca8a04',
+                    700: '#a16207',
+                    800: '#854d0e',
+                    900: '#713f12',
                 },
-                accent: '#c5a47e',
+                accent: {
+                    DEFAULT: '#148287', // HRSD Teal (Pantone 2237 C)
+                    teal: '#148287',
+                    green: '#2DB473', // HRSD Green (Pantone 3385 C)
+                    blue: '#14415A', // HRSD Dark Blue (Pantone 3025 C)
+                },
                 surface: '#F9FAFB',
             },
             fontFamily: {
