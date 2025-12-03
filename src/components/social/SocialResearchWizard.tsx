@@ -51,7 +51,6 @@ export const SocialResearchWizard: React.FC = () => {
 
     const handleSubmit = () => {
         // Here we would save to the backend/context
-        console.log('Saving Social Research:', formData);
         // Simulate API call
         setTimeout(() => {
             navigate('/social');
@@ -243,8 +242,8 @@ export const SocialResearchWizard: React.FC = () => {
                             <div key={step.id} className="flex flex-col items-center bg-white px-2">
                                 <div
                                     className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-colors ${isActive ? 'border-blue-600 bg-blue-50 text-blue-600' :
-                                            isCompleted ? 'border-green-600 bg-green-50 text-green-600' :
-                                                'border-gray-300 text-gray-400'
+                                        isCompleted ? 'border-green-600 bg-green-50 text-green-600' :
+                                            'border-gray-300 text-gray-400'
                                         }`}
                                 >
                                     {isCompleted ? <CheckCircle className="w-6 h-6" /> : <Icon className="w-5 h-5" />}
